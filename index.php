@@ -1,4 +1,11 @@
 <?php
+  /*
+   * Shawn Potter
+   * 1/28/2021
+   * index.php
+   * Fat-Free Controller Page
+   */
+
   //The Controller
 
   //turn on error reporting
