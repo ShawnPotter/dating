@@ -1,3 +1,9 @@
+<!--
+- Shawn Potter
+- 1/28/2021
+- Home.html
+- A homepage view for index.php to render
+-->
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,48 +23,44 @@
 
   <title>Dating Website</title>
 </head>
-<body>
+<body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 shadow-sm">
-  <a class="navbar-brand" href="#">Dating Website</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 border">
+  <a class="navbar-brand" href="#">Balanced</a>
 </nav>
 
-<div class="container" id="main">
-  <div class="row justify-content-center">
+<div class="container border rounded bg-white" id="main">
+  <div class="row p-3 justify-content-center">
     <div class="col-6 align-self-center">
       <div class="row justify-content-center">
-        <h2>H2 Test Header</h2>
-        <div class="">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-            occaecat cupidatat non proident, sunt in culpa qui officia
-            deserunt mollit anim id est laborum.
+        <h2>Balanced</h2>
+        <div>
+          <p class="mx-2" id="mainText">
+            Welcome to the Internet's most successful dating website!
+            At <strong>Balanced</strong> you'll meet other like minded
+            individuals. We have a high success rate of couples finding
+            their match. User's are matched by interests, values and location.
+            Find out why so many others have found love on Balanced
           </p>
         </div>
       </div>
-      <div class="row justify-content-center">
-        <h3>H3 Test Header</h3>
+      <div class="row justify-content-center mt-5">
+        <h3>Here what our users are saying about us!</h3>
         <div>
           <hr>
           <blockquote class="ml-5">
             <em>
-              Lorem ipsum dolor sit amet, consectetur adipiscing! - Andrea
+              "I met the love of my life after only a month!" - Andrea
             </em>
           </blockquote>
           <blockquote class="ml-5">
             <em>
-              Lorem ipsum dolor sit amet! - John Smith
+              "It was so easy to set up a profile and start meeting people. I didn't realize how many others were looking for love in my area..." - John Smith
             </em>
           </blockquote>
           <blockquote class="ml-5">
             <em>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. - Sarah
+              "Just try it! You'll never be the same!" - Sarah
             </em>
           </blockquote>
           <hr>
@@ -68,7 +70,7 @@
         <button class="btn btn-lg btn-primary rounded">Create A Profile!</button>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-6 align-self-center">
       <img class="rounded"
            id="image"
            src="images/home_image.jpg"
