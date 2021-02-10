@@ -1,0 +1,97 @@
+<!--
+- Shawn Potter
+- 1/28/2021
+- info1.html
+- A homepage view for index.php to render
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Other Meta Tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- Other Stylesheets -->
+  <link rel="stylesheet" href="styles/styles.css">
+
+  <title>Balanced</title>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 border">
+  <a class="navbar-brand" href="{{ @BASE }}">Balanced</a>
+</nav>
+
+<div class="container border rounded bg-white" id="main">
+  <div class="row w-100 mt-3">
+    <div class="col-6">
+      <div class="row mx-auto w-100">
+        <div class="col-12 border p-3">
+          <span>Name: {{ @firstName }} {{ @lastName }}</span>
+        </div>
+        <div class="col-12 border p-3">
+          <span>Gender: {{ @gender }}</span>
+        </div>
+        <div class="col-12 border p-3">
+          <span>Age: {{ @age }}</span>
+        </div>
+        <div class="col-12 border p-3">
+          <span>Phone: {{ @phone }}</span>
+        </div>
+        <div class="col-12 border p-3">
+          <span>Email: {{ @email }}</span>
+        </div>
+        <div class="col-12 border p-3">
+          <span>State: {{ @state }}</span>
+        </div>
+        <div class="col-12 border p-3">
+          <span>Seeking: {{ @seeking }}</span>
+        </div>
+        <div class="col-12 border p-3">
+          <span>Interests: {{ @indoorInterest }}, {{ @outdoorInterest }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row mx-auto w-100">
+        <div class="col-12 text-center">
+          <img
+                  class="image"
+                  id="standIn"
+                  src="images/human.jpg"
+                  alt="a black silhouette of a human"
+          >
+        </div>
+        <div class="col-12">
+          <h5>Biography</h5>
+          <span>
+            {{ @userBio }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-end mb-3">
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">
+        Next >
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- jQuery first, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+<!-- Optional JavaScript -->
+</body>
+</html>

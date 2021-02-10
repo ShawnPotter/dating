@@ -1,0 +1,88 @@
+<!--
+- Shawn Potter
+- 1/28/2021
+- info2.html
+- A homepage view for index.php to render
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Other Meta Tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- Other Stylesheets -->
+  <link rel="stylesheet" href="styles/styles.css">
+
+  <title>Balanced</title>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 border">
+  <a class="navbar-brand" href="{{ @BASE }}">Balanced</a>
+</nav>
+
+<div class="container border rounded bg-white" id="main">
+  <form action="interests" method="POST">
+    <fieldset>
+      <legend>
+        Profile
+      </legend>
+      <hr>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="inputGroupLabel" for="email">Email</label><br>
+            <input type="text" class="form-control" id="email" name="email">
+          </div>
+          <div class="form-group">
+            <label class="inputGroupLabel" for="state">State</label><br>
+            <select class="form-control" id="state" name="state">
+              <repeat group="{{ @states }}" value="{{ @state }}">
+                <option>{{ @state }}</option>
+              </repeat>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="inputGroupLabel">Seeking</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="seeking[]" id="genderMale" value="male">
+              <label class="form-check-label" for="genderMale">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="seeking[]" id="genderFemale" value="female">
+              <label class="form-check-label" for="genderFemale">Female</label>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="inputGroupLabel" for="userBio">Biography</label><br>
+            <textarea class="form-control" id="userBio" name="userBio" rows="6"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row justify-content-end">
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Next ></button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+
+<!-- jQuery first, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+<!-- Optional JavaScript -->
+</body>
+</html>
