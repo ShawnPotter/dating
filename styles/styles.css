@@ -1,9 +1,20 @@
-hr{
+.quoteRule{
     width: 90%;
     height: 1px;
     background-color:lightgray;
 }
-#image{
+.image{
     height: auto;
     max-width: 100%;
+}
+#standIn{
+    width: 70%;
+}
+.inputGroupLabel{
+    font-weight: bold;
+    font-size: 1rem;
+}
+legend{
+    font-size: 1.8rem;
+    font-weight:500;
 }
