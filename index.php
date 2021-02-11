@@ -114,6 +114,8 @@
 
     $view = new Template();
     echo $view->render('views/summary.html');
+    
+    session_destroy();
   });
 
 
