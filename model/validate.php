@@ -3,40 +3,60 @@
   {
     private $_data;
     
-    function __construct(){
+    function __construct() {
       $this->_data = new DatingDataLayer();
     }
     
-    function validName($name){
+    function validName($name) {
       return !empty($name) && ctype_alpha($name);
     }
     
-    function validAge($age){
+    function validAge($age) {
       return !empty($age) && ctype_digit($age);
     }
+
+    function validGender($gender) {
+      if($gender == "male" || $gender == "female"){
+        return true;
+      } else {
+        return false;
+      }
+    }
     
-    function validPhone($phone){
-      if($phone.length == 10){
-        return !empty($phone) && ctype_digit($phone);
+    function validPhone($phone) {
+      $validPhone = preg_replace('/[^0-9]/', '', $phone);
+      if(strlen($validPhone) === 10){
+        return !empty($validPhone) && ctype_alnum($validPhone);
       } else {
         return false;
       }
       
     }
-    
-    function validEmail($email){
-    
+
+    function validBio($bio) {
+      return !empty($bio) && ctype_alpha($bio);
     }
     
-    function validState($state){
-    
+    function validEmail($email) {
+      if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return true;
+      } else {
+        return false;
+      }
     }
     
-    function validOutdoor($activity){
-    
+    function validState($state) {
+      $validStates = $this->_data->getStates();
+      return in_array($state, $validStates);
     }
     
-    function validIndoor($activity){
+    function validOutdoor($activity) {
+      $validActivity = $this->_data->getIndoorActivities();
+      return in_array($activity, $validActivity);
+    }
     
+    function validIndoor($activity) {
+      $validActivity = $this->_data->getOutDoorActivities();
+      return in_array($activity, $validActivity);
     }
   }

@@ -8,6 +8,7 @@
     private $_email;
     private $_state;
     private $_seeking;
+    private $_bio;
     private $_interests;
   
     /**
@@ -21,17 +22,6 @@
      * @param $_seeking
      * @param $_interests
      */
-    public function __construct($_name, $_gender, $_age, $_phone, $_email, $_state, $_seeking, $_interests)
-    {
-      $this -> _name = $_name;
-      $this -> _gender = $_gender;
-      $this -> _age = $_age;
-      $this -> _phone = $_phone;
-      $this -> _email = $_email;
-      $this -> _state = $_state;
-      $this -> _seeking = $_seeking;
-      $this -> _interests = $_interests;
-    }
   
     /**
      * @return mixed
@@ -144,6 +134,23 @@
     {
       $this -> _seeking = $seeking;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBio()
+    {
+      return $this -> _bio;
+    }
+
+    /**
+     * @param mixed $bio
+     */
+    public function setBio($bio)
+    {
+      $this -> _bio = $bio;
+    }
+
   
     /**
      * @return mixed
