@@ -22,6 +22,7 @@
   $f3 = Base::instance();
   $valid = new DatingValidate();
   $data = new DatingDataLayer();
+  $form = new Form();
   $control = new Controller($f3);
   
   $f3->set('DEBUG', 3);
@@ -32,28 +33,24 @@
     $control -> home();
   });
 
-  $f3->route('GET /info', function($f3){
+  $f3->route('GET|POST /info', function($f3){
     global $control;
     $control -> info();
   });
 
-  $f3->route('POST /location', function($f3){
+  $f3->route('GET|POST /location', function($f3){
     global $control;
     $control -> location();
   });
 
-  $f3->route('POST /interests', function($f3){
+  $f3->route('GET|POST /interests', function($f3){
     global $control;
     $control -> interests();
   });
   
-  $f3->route('POST /summary', function($f3){
+  $f3->route('GET|POST /summary', function($f3){
     global $control;
     $control -> summary();
-    
-    
-    
-    
   });
 
 
