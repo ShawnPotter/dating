@@ -30,7 +30,7 @@
 </nav>
 
 <div class="container border rounded bg-white" id="main">
- <form action="location" method="#">
+ <form action="#" method="POST">
    <fieldset>
      <legend>
        Personal Information
@@ -38,31 +38,73 @@
      <hr>
      <div class="form-group">
        <label class="inputGroupLabel" for="firstName">First Name</label><br>
-       <input type="text" class="form-control" id="firstName" name="firstName">
+       <input type="text"
+              class="form-control"
+              id="firstName"
+              name="firstName"
+              value="{{ @fname }}"
+       >
      </div>
+     <span class="text-danger">
+       <check if="{{ isset(@errors['fname']) }}">
+         {{ @errors['fname'] }}
+       </check>
+     </span>
      <div class="form-group">
        <label class="inputGroupLabel" for="lastName">Last Name</label><br>
        <input type="text" class="form-control" id="lastName" name="lastName">
      </div>
+     <span class="text-danger">
+       <check if="{{ isset(@errors['lname']) }}">
+         {{ @errors['lname'] }}
+       </check>
+     </span>
      <div class="form-group">
        <label class="inputGroupLabel" for="age">Age</label><br>
        <input type="text" class="form-control" id="age" name="age">
      </div>
+     <span class="text-danger">
+       <check if="{{ isset(@errors['age']) }}">
+         {{ @errors['age'] }}
+       </check>
+     </span>
      <div class="form-group">
        <label class="inputGroupLabel">Gender</label><br>
        <div class="form-check form-check-inline">
-         <input class="form-check-input" type="radio" name="gender[]" id="genderMale" value="male">
+         <input class="form-check-input"
+                type="radio"
+                name="gender"
+                id="genderMale"
+                value="male"
+                <check if="{{ @genderChoice == 'male' }}">checked</check>
+         >
          <label class="form-check-label" for="genderMale">Male</label>
        </div>
        <div class="form-check form-check-inline">
-         <input class="form-check-input" type="radio" name="gender[]" id="genderFemale" value="female">
+         <input class="form-check-input"
+                type="radio"
+                name="gender"
+                id="genderFemale"
+                value="female"
+                <check if="{{ @genderChoice == 'female' }}">checked</check>
+         >
          <label class="form-check-label" for="genderFemale">Female</label>
        </div>
      </div>
+     <span class="text-danger">
+       <check if="{{ isset(@errors['gender']) }}">
+         {{ @errors['gender'] }}
+       </check>
+     </span>
      <div class="form-group">
        <label class="inputGroupLabel" for="phone">Phone Number</label><br>
        <input type="text" class="form-control" id="phone" name="phone">
      </div>
+     <span class="text-danger">
+       <check if="{{ isset(@errors['phone']) }}">
+         {{ @errors['phone'] }}
+       </check>
+     </span>
      <div class="form-group row justify-content-end">
        <div class="col-auto">
            <button type="submit" class="btn btn-primary">

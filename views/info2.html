@@ -30,7 +30,7 @@
 </nav>
 
 <div class="container border rounded bg-white" id="main">
-  <form action="interests" method="#">
+  <form action="#" method="POST">
     <fieldset>
       <legend>
         Profile
@@ -40,8 +40,13 @@
         <div class="col">
           <div class="form-group">
             <label class="inputGroupLabel" for="email">Email</label><br>
-            <input type="text" class="form-control" id="email" name="email">
+            <input type="text" class="form-control" id="email" name="email" value="{{ @email }}">
           </div>
+          <span class="text-danger">
+            <check if="{{ isset(@errors['email']) }}">
+              {{ @errors['email'] }}
+            </check>
+          </span>
           <div class="form-group">
             <label class="inputGroupLabel" for="state">State</label><br>
             <select class="form-control" id="state" name="state">
@@ -50,25 +55,50 @@
               </repeat>
             </select>
           </div>
+          <span class="text-danger">
+            <check if="{{ isset(@errors['state']) }}">
+              {{ @errors['state'] }}
+            </check>
+          </span>
           <div class="form-group">
             <label class="inputGroupLabel">Seeking</label><br>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="seeking[]" id="genderMale" value="male">
+              <input class="form-check-input"
+                     type="radio" name="seeking"
+                     id="genderMale" value="male"
+                     <check if="{{ @seekingChoice == 'male' }}">checked</check>
+              >
               <label class="form-check-label" for="genderMale">Male</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="seeking[]" id="genderFemale" value="female">
+              <input class="form-check-input"
+                     type="radio"
+                     name="seeking"
+                     id="genderFemale"
+                     value="female"
+                     <check if="{{ @seekingChoice == 'female' }}">checked</check>
+              >
               <label class="form-check-label" for="genderFemale">Female</label>
             </div>
           </div>
         </div>
+        <span class="text-danger">
+            <check if="{{ isset(@errors['seeking']) }}">
+              {{ @errors['seeking'] }}
+            </check>
+          </span>
         <div class="col">
           <div class="form-group">
             <label class="inputGroupLabel" for="userBio">Biography</label><br>
-            <textarea class="form-control" id="userBio" name="userBio" rows="6"></textarea>
+            <textarea class="form-control" id="userBio" name="userBio" rows="6" value="{{ @bio }}"></textarea>
           </div>
         </div>
       </div>
+      <span class="text-danger">
+            <check if="{{ isset(@errors['bio']) }}">
+              {{ @errors['bio'] }}
+            </check>
+          </span>
       <div class="form-group row justify-content-end">
         <div class="col-auto">
           <button type="submit" class="btn btn-primary">Next ></button>

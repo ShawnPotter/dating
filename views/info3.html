@@ -30,7 +30,7 @@
 </nav>
 
 <div class="container border rounded bg-white" id="main">
-  <form method="POST" action="summary">
+  <form method="POST" action="#">
     <fieldset>
       <legend>
         Interests
@@ -47,6 +47,12 @@
           </repeat>
         </div>
       </div>
+      <span class="text-danger">
+        <check if="{{ isset(@errors['indoorActivities']) }}">
+          {{ @errors['indoorActivity'] }}
+        </check>
+      </span>
+
       <div class="form-group">
         <label class="inputGroupLabel">Outdoor Interests</label><br>
         <div class="form-check form-check-inline form-row w-100">
@@ -58,6 +64,12 @@
           </repeat>
         </div>
       </div>
+      <span class="text-danger">
+        <check if="{{ isset(@errors['outdoorActivity']) }}">
+          {{ @errors['outdoorActivity'] }}
+        </check>
+      </span>
+
       <div class="form-group row justify-content-end">
         <div class="col-auto">
           <button type="submit" class="btn btn-primary">Next ></button>
