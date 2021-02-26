@@ -12,18 +12,6 @@
     private $_interests;
   
     /**
-     * Form constructor.
-     * @param $_name
-     * @param $_gender
-     * @param $_age
-     * @param $_phone
-     * @param $_email
-     * @param $_state
-     * @param $_seeking
-     * @param $_interests
-     */
-  
-    /**
      * @return mixed
      */
     public function getName()
@@ -165,7 +153,12 @@
      */
     public function setInterests($interests)
     {
-      $this -> _interests = $interests;
+      if(empty($this->_interests)){
+        $this -> _interests = $interests;
+      } else {
+        $this -> _interests += $interests;
+      }
+      
     }
   
     

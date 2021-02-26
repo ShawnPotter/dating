@@ -34,7 +34,8 @@
     }
 
     function validBio($bio) {
-      return !empty($bio) && ctype_alpha($bio);
+      $bio = filter_var($bio, FILTER_SANITIZE_STRING);
+      return $bio;
     }
     
     function validEmail($email) {
@@ -50,13 +51,29 @@
       return in_array($state, $validStates);
     }
     
-    function validOutdoor($activity) {
-      $validActivity = $this->_data->getIndoorActivities();
-      return in_array($activity, $validActivity);
+    function validIndoor($activities) {
+      $validActivities = $this->_data->getIndoorActivities();
+      $validActivities = array_keys($validActivities);
+      /*var_dump($validActivities);
+      echo "<br>";*/
+      foreach($activities as $activity){
+        if(!in_array($activity, $validActivities)){
+          return false;
+        }
+      }
+      return true;
     }
     
-    function validIndoor($activity) {
-      $validActivity = $this->_data->getOutDoorActivities();
-      return in_array($activity, $validActivity);
+    function validOutdoor($activities) {
+      $validActivities = $this->_data->getOutDoorActivities();
+      $validActivities = array_keys($validActivities);
+      /*var_dump($validActivities);
+      echo "<br>";*/
+      foreach($activities as $activity){
+        if(!in_array($activity, $validActivities)){
+          return false;
+        }
+      }
+      return true;
     }
   }

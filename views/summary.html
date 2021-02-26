@@ -34,28 +34,31 @@
     <div class="col-6">
       <div class="row mx-auto w-100">
         <div class="col-12 border p-3">
-          <span>Name: {{ @firstName }} {{ @lastName }}</span>
+          <span>Name: {{ @SESSION.name }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Gender: {{ @gender }}</span>
+          <span>Gender: {{ @SESSION.gender }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Age: {{ @age }}</span>
+          <span>Age: {{ @SESSION.age }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Phone: {{ @phone }}</span>
+          <span>Phone: {{ @SESSION.phone }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Email: {{ @email }}</span>
+          <span>Email: {{ @SESSION.email }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>State: {{ @state }}</span>
+          <span>State: {{ @SESSION.state }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Seeking: {{ @seeking }}</span>
+          <span>Seeking: {{ @SESSION.seeking }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Interests: {{ @indoorInterest }}, {{ @outdoorInterest }}</span>
+          <span>
+            Interests:{{ @SESSION.indoorInterests }}<check if="{{ !empty(@SESSION.indoorInterests) && !empty(@SESSION.outdoorInterests) }}">,</check>
+            {{ @SESSION.outdoorInterests }}
+          </span>
         </div>
       </div>
     </div>
