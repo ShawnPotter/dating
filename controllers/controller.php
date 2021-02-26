@@ -9,7 +9,7 @@
      */
     public function __construct($f3)
     {
-      $this -> _f3 = $f3;
+      $this->_f3 = $f3;
     }
   
     function home()
@@ -22,7 +22,7 @@
     function info()
     {
       global $valid;
-      global $form;
+      //global $form;
       
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $fname = $_POST['firstName'];
@@ -37,7 +37,7 @@
         } else if(empty($lname)){
           $this->_f3->set("errors['lname']", "Please enter a last name");
         } else if($valid->validName($fname) && $valid->validName($lname)) {
-          $form->setName($fname." ".$lname);
+          $_SESSION['name'] = $fname." ".$lname;
         } else {
           $this->_f3->set("errors['name']", "Name is not valid, please try again");
         }
@@ -46,13 +46,13 @@
         if(empty($age)) {
           $this->_f3->set("errors['age']", "Please enter an age");
         } else if($valid->validAge($age)) {
-          $form->setAge($age);
+          $_SESSION['age'] = $age;
         } else {
           $this->_f3->set("errors['age']", "Age is not valid, please try again");
         }
 
         if($valid->validGender($gender)) {
-          $form->setGender($gender);
+          $_SESSION['gender'] = $gender;
         } else {
           $this->_f3->set("errors['gender']", "Stop spoofing my page!");
         }
@@ -60,13 +60,12 @@
         if(empty($phone)) {
           $this->_f3->set("errors['phone']", "Please enter a phone number");
         } else if($valid->validPhone($phone)) {
-          $form->setPhone($phone);
+          $_SESSION['phone'] = $phone;
         } else {
           $this->_f3->set("errors['phone']", "Phone number must contain numbers");
         }
 
         if(empty($this->_f3->get('errors'))) {
-          $SESSION['form'] = $form;
           $this->_f3->reroute('/location');
         }
       }
@@ -86,9 +85,10 @@
     }
     function location()
     {
+      var_dump($_SESSION['form']);
       global $valid;
-      global $form;
       global $data;
+      //global $form;
 
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST['email'];
@@ -99,53 +99,33 @@
         if(!isset($valid)) {
           $this->_f3->set("errors['email']", "Email is required");
         } else if($valid->validEmail($email)) {
-          $form->setEmail($email);
+          $_SESSION['email'] = $email;
         } else {
           $this->_f3->set("errors['email']", "Email is not valid, please try again");
         }
 
         if($valid->validState($state)) {
-          $form->setState($state);
+          $_SESSION['state'] = $state;
         } else {
           $this->_f3->set("errors['state']", "Why are you changing this list?");
         }
 
         if($valid->validGender($seeking)) {
-          $form->setSeeking($seeking);
+          $_SESSION['seeking'] = $seeking;
         } else {
           $this->_f3->set("errors['seeking']", "Please don't");
         }
 
         if($valid->validBio($bio) || empty($bio)) {
-          $form->setBio($bio);
+          $_SESSION['bio'] = $bio;
         } else {
           $this->_f3->set("errors['bio']", "Could you not, please?");
         }
+        if(empty($this->_f3->get('errors'))) {
+          $this -> _f3 -> reroute('/interests');
+        }
 
       }
-
-      //get the post data from the last page
-      /*
-     if(isset($_POST['firstName'])){
-        $_SESSION['firstName'] = $_POST['firstName'];
-      }
-      if(isset($_POST['lastName'])){
-        $_SESSION['lastName'] = $_POST['lastName'];
-      }
-      if(isset($_POST['age'])){
-        $_SESSION['age'] = $_POST['age'];
-      }
-      if(isset($_POST['gender'])){
-        $gender = implode(", ", $_POST['gender']);
-        $_SESSION['gender'] = $gender;
-      }
-      if(isset($_POST['phone'])){
-        $_SESSION['phone'] = $_POST['phone'];
-      }
-     */
-      //var_dump($_SESSION);
-
-
       
       $this->_f3->set('states', $data->getStates());
       $this->_f3->set("email", isset($email) ? $email : "");
@@ -164,23 +144,35 @@
     {
       global $valid;
       global $data;
+      //global $form;
       
-      /*
-      if(isset($_POST['email'])){
-        $_SESSION['email'] = $_POST['email'];
+      if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $indoor = $_POST['indoorInterest'];
+        $outdoor = $_POST['outdoorInterest'];
+        /*var_dump($indoor);
+        echo "<br>";
+        var_dump($outdoor);
+        echo "<br>";*/
+        
+        if (empty($indoor)){
+          $_SESSION['indoorInterests'] = "";
+        } else if ($valid -> validIndoor($indoor)) {
+          $_SESSION['indoorInterests'] = implode(", ", $indoor);
+        } else {
+          $this->_f3->set("errors['indoorActivities']", "Stop spoofing me");
+        }
+  
+        if (empty($outdoor)){
+          $_SESSION['outdoorInterests'] = "";
+        } else if ($valid->validOutdoor($outdoor)) {
+          $_SESSION['outdoorInterests'] = implode(", ", $outdoor);
+        } else {
+          $this->_f3->set("errors['outdoorActivities']", "Stop spoofing me");
+        }
+        if(empty($this->_f3->get('errors'))) {
+          $this -> _f3 -> reroute('/summary');
+        }
       }
-      if(isset($_POST['state'])){
-        $_SESSION['state'] = $_POST['state'];
-      }
-      if(isset($_POST['seeking'])){
-        $seeking = implode(", ", $_POST['seeking']);
-        $_SESSION['seeking'] = $seeking;
-      }
-      if(isset($_POST['userBio'])){
-        $_SESSION['userBio'] = $_POST['userBio'];
-      }
-      */
-      //var_dump($_SESSION);
   
       $this->_f3->set('indoorActivities', $data->getIndoorActivities());
       $this->_f3->set('outdoorActivities', $data->getOutDoorActivities());
@@ -191,33 +183,9 @@
     
     function summary()
     {
-      /*
-      if(isset($_POST['indoorInterest'])){
-        $indoor = implode(", ", $_POST['indoorInterest']);
-        $_SESSION['indoorInterest'] = $indoor;
-      }
-      if(isset($_POST['outdoorInterest'])){
-        $outdoor = implode(", ", $_POST['outdoorInterest']);
-        $_SESSION['outdoorInterest'] = $outdoor;
-      }
-  
-       $this->_f3->set("firstName", $_SESSION['firstName']);
-       $this->_f3->set("lastName", $_SESSION['lastName']);
-       $this->_f3->set("age", $_SESSION['age']);
-       $this->_f3->set("phone", $_SESSION['phone']);
-       $this->_f3->set("state", $_SESSION['state']);
-       $this->_f3->set("gender", $_SESSION['gender']);
-       $this->_f3->set("seeking", $_SESSION['seeking']);
-       $this->_f3->set("userBio", $_SESSION['userBio']);
-       $this->_f3->set("email", $_SESSION['email']);
-       $this->_f3->set("indoorInterest", $_SESSION['indoorInterest']);
-       $this->_f3->set("outdoorInterest", $_SESSION['outdoorInterest']);
-      */
-  
-      //var_dump($_SESSION);
-  
       $view = new Template();
       echo $view->render('views/summary.html');
+      
   
       session_destroy();
     }
