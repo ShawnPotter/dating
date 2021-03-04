@@ -2,7 +2,7 @@
 - Shawn Potter
 - 1/28/2021
 - info1.html
-- A homepage view for index.php to render
+- Form page to ask users for their name, age, gender, and phone number
 -->
 <!doctype html>
 <html lang="en">
@@ -37,12 +37,13 @@
      </legend>
      <hr>
      <div class="form-group">
-       <label class="inputGroupLabel" for="firstName">First Name</label><br>
+       <label class="inputGroupLabel" for="firstName">First Name<sup class="text-danger">*</sup></label><br>
        <input type="text"
               class="form-control"
               id="firstName"
               name="firstName"
               value="{{ @fname }}"
+              placeholder="Required"
        >
      </div>
      <span class="text-danger">
@@ -51,8 +52,14 @@
        </check>
      </span>
      <div class="form-group">
-       <label class="inputGroupLabel" for="lastName">Last Name</label><br>
-       <input type="text" class="form-control" id="lastName" name="lastName">
+       <label class="inputGroupLabel" for="lastName">Last Name<sup class="text-danger">*</sup></label><br>
+       <input type="text"
+              class="form-control"
+              id="lastName"
+              placeholder="Required"
+              name="lastName"
+              value="{{ @lname }}"
+       >
      </div>
      <span class="text-danger">
        <check if="{{ isset(@errors['lname']) }}">
@@ -60,8 +67,14 @@
        </check>
      </span>
      <div class="form-group">
-       <label class="inputGroupLabel" for="age">Age</label><br>
-       <input type="text" class="form-control" id="age" name="age">
+       <label class="inputGroupLabel" for="age">Age<sup class="text-danger">*</sup></label><br>
+       <input type="text"
+              class="form-control"
+              placeholder="Required"
+              id="age"
+              name="age"
+              value="{{ @age }}"
+       >
      </div>
      <span class="text-danger">
        <check if="{{ isset(@errors['age']) }}">
@@ -97,14 +110,21 @@
        </check>
      </span>
      <div class="form-group">
-       <label class="inputGroupLabel" for="phone">Phone Number</label><br>
-       <input type="text" class="form-control" id="phone" name="phone">
+       <label class="inputGroupLabel" for="phone">Phone Number<sup class="text-danger">*</sup></label><br>
+       <input type="text" class="form-control" id="phone" name="phone" placeholder="Required" value="{{ @phone }}">
      </div>
      <span class="text-danger">
        <check if="{{ isset(@errors['phone']) }}">
          {{ @errors['phone'] }}
        </check>
      </span>
+     <div class="form-group">
+       <label class="inputGroupLabel">Premium Membership</label><br>
+       <div class="form-group w-auto">
+         <input class="form-check-inline" type="checkbox" value="true" id="premium" name="premium">
+         <label class="form-check-label" for="premium">Sign me up for a Premium Account!</label>
+       </div>
+     </div>
      <div class="form-group row justify-content-end">
        <div class="col-auto">
            <button type="submit" class="btn btn-primary">

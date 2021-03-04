@@ -2,7 +2,7 @@
 - Shawn Potter
 - 1/28/2021
 - info2.html
-- A homepage view for index.php to render
+- Form page to ask users for their email, state, who they are seeking, and a biography
 -->
 <!doctype html>
 <html lang="en">
@@ -39,7 +39,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label class="inputGroupLabel" for="email">Email</label><br>
+            <label class="inputGroupLabel" for="email">Email<sup class="text-danger">*</sup></label><br>
             <input type="text" class="form-control" id="email" name="email" value="{{ @email }}">
           </div>
           <span class="text-danger">
@@ -51,6 +51,7 @@
             <label class="inputGroupLabel" for="state">State</label><br>
             <select class="form-control" id="state" name="state">
               <repeat group="{{ @states }}" value="{{ @state }}">
+                <check if="{{ @selectedState == @state }}"><option selected>{{ @state }}</option></check>
                 <option>{{ @state }}</option>
               </repeat>
             </select>
@@ -90,7 +91,7 @@
         <div class="col">
           <div class="form-group">
             <label class="inputGroupLabel" for="userBio">Biography</label><br>
-            <textarea class="form-control" id="userBio" name="userBio" rows="6" value="{{ @bio }}"></textarea>
+            <textarea class="form-control" id="userBio" name="userBio" rows="6">{{ @bio }}</textarea>
           </div>
         </div>
       </div>

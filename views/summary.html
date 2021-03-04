@@ -2,7 +2,7 @@
 - Shawn Potter
 - 1/28/2021
 - info1.html
-- A homepage view for index.php to render
+- A summary page for all the SESSION data collected from the form the user filled out.
 -->
 <!doctype html>
 <html lang="en">
@@ -24,42 +24,42 @@
   <title>Balanced</title>
 </head>
 <body class="bg-light">
-
 <nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 border">
   <a class="navbar-brand" href="{{ @BASE }}">Balanced</a>
 </nav>
-
 <div class="container border rounded bg-white" id="main">
   <div class="row w-100 mt-3">
     <div class="col-6">
       <div class="row mx-auto w-100">
         <div class="col-12 border p-3">
-          <span>Name: {{ @SESSION.name }}</span>
+          <span>Name: {{ @SESSION.member->getFname() }} {{ @SESSION.member->getLname() }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Gender: {{ @SESSION.gender }}</span>
+          <span>Gender: {{ @SESSION.member->getGender() }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Age: {{ @SESSION.age }}</span>
+          <span>Age: {{ @SESSION.member->getAge() }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Phone: {{ @SESSION.phone }}</span>
+          <span>Phone: {{ @SESSION.member->getPhone() }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Email: {{ @SESSION.email }}</span>
+          <span>Email: {{ @SESSION.member->getEmail() }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>State: {{ @SESSION.state }}</span>
+          <span>State: {{ @SESSION.member->getState() }}</span>
         </div>
         <div class="col-12 border p-3">
-          <span>Seeking: {{ @SESSION.seeking }}</span>
+          <span>Seeking: {{ @SESSION.member->getSeeking() }}</span>
         </div>
-        <div class="col-12 border p-3">
-          <span>
-            Interests:{{ @SESSION.indoorInterests }}<check if="{{ !empty(@SESSION.indoorInterests) && !empty(@SESSION.outdoorInterests) }}">,</check>
-            {{ @SESSION.outdoorInterests }}
-          </span>
-        </div>
+        <check if="{{ @SESSION.isPremium }}">-->
+          <div class="col-12 border p-3">
+            <span>
+              Interests:{{ @SESSION.premium->getInDoorInterests() }}<check if="{{ !empty(@SESSION.indoorInterests) && !empty(@SESSION.outdoorInterests) }}">,</check>
+              {{ @SESSION.premium->getOutDoorInterests() }}
+            </span>
+          </div>
+        </check>
       </div>
     </div>
     <div class="col-6">
@@ -75,7 +75,7 @@
         <div class="col-12">
           <h5>Biography</h5>
           <span>
-            {{ @userBio }}
+            {{ @SESSION.member->getBio() }}
           </span>
         </div>
       </div>

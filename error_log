@@ -1,0 +1,8 @@
+[04-Mar-2021 05:38:38 UTC] PHP Fatal error:  Uncaught ErrorException: proc_open(): fork failed - Resource temporarily unavailable in phar:///usr/sbin/composer/vendor/symfony/console/Application.php:958
+Stack trace:
+#0 [internal function]: Composer\Util\ErrorHandler::handle(2, 'proc_open(): fo...', 'phar:///usr/sbi...', 958, Array)
+#1 phar:///usr/sbin/composer/vendor/symfony/console/Application.php(958): proc_open('stty -a | grep ...', Array, NULL, NULL, NULL, Array)
+#2 phar:///usr/sbin/composer/vendor/symfony/console/Application.php(760): Symfony\Component\Console\Application->getSttyColumns()
+#3 phar:///usr/sbin/composer/vendor/symfony/console/Application.php(721): Symfony\Component\Console\Application->getTerminalDimensions()
+#4 phar:///usr/sbin/composer/vendor/symfony/console/Application.php(655): Symfony\Component\Console\Application->getTerminalWidth()
+#5 phar:///usr/sbin/composer/vendor/symfony/console/Application.php(127): Symfony\Component\Console\Application->renderException(Object(ErrorException), Object(Symfony\Component\Console\Output\Stream in phar:///usr/sbin/composer/vendor/symfony/console/Application.php on line 958
