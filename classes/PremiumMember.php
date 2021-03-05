@@ -6,7 +6,9 @@
     private $_outDoorInterests;
   
     /**
-     * @return Array
+     * Returns an array of indoor interests
+     *
+     * @return array
      */
     public function getInDoorInterests()
     {
@@ -14,7 +16,9 @@
     }
   
     /**
-     * @param Array $inDoorInterests
+     * Sets an array of indoor interests
+     *
+     * @param array $inDoorInterests
      */
     public function setInDoorInterests($inDoorInterests)
     {
@@ -22,7 +26,9 @@
     }
   
     /**
-     * @return Array
+     * Returns an array of outdoor interests
+     *
+     * @return array
      */
     public function getOutDoorInterests()
     {
@@ -30,7 +36,9 @@
     }
   
     /**
-     * @param Array $outDoorInterests
+     * Sets an array of outdoor interests
+     *
+     * @param array $outDoorInterests
      */
     public function setOutDoorInterests($outDoorInterests)
     {

@@ -106,9 +106,21 @@
       $validStates = $this->_data->getStates();
       return in_array($state, $validStates);
     }
-    
-    function validPremium($premium){
-      if($premium == true){
+  
+  
+    /**
+     * Checks to see if isPremium is valid
+     *
+     * Check to see if isPremium is valid, the only acceptable value is a
+     * String of "true" otherwise it will always return false. This will
+     * prevent spoofing attempts as the value of isPremium is only used to
+     * return a bool.
+     *
+     * @param String $isPremium
+     * @return bool
+     */
+    function validPremium($isPremium){
+      if($isPremium == "true"){
         return true;
       } else {
         return false;

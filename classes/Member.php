@@ -12,11 +12,11 @@
     private $_bio;
   
     /**
-     * Member constructor.
-     * @param $_fname
-     * @param $_lname
-     * @param $_gender
-     * @param $_age
+     * MemberSets varname class variable constructor.
+     * @paramSets varname class variable $_fname
+     * @paramSets varname class variable $_lname
+     * @paramSets varname class variable $_gender
+     * @paramSets varname class variable $_age
      * @param $_phone
      */
     public function __construct($_fname, $_lname, $_gender, $_age, $_phone)
@@ -30,6 +30,7 @@
   
   
     /**
+     * Returns $_fname class variable
      * @return String
      */
     public function getFname()
@@ -38,6 +39,7 @@
     }
   
     /**
+     * Sets $_fname class variable
      * @param String $fname
      */
     public function setFname($fname)
@@ -46,6 +48,7 @@
     }
   
     /**
+     * Returns $_lname class variable
      * @return String
      */
     public function getLname()
@@ -54,6 +57,7 @@
     }
   
     /**
+     * Sets $_lname class variable
      * @param String $lname
      */
     public function setLname($lname)
@@ -63,6 +67,7 @@
     
   
     /**
+     * Returns $_gender class variable
      * @return String
      */
     public function getGender()
@@ -71,6 +76,7 @@
     }
   
     /**
+     * Sets $_gender class variable
      * @param String $gender
      */
     public function setGender($gender)
@@ -79,6 +85,7 @@
     }
   
     /**
+     * Returns $_age class variable
      * @return Integer
      */
     public function getAge()
@@ -87,6 +94,7 @@
     }
   
     /**
+     * Sets $_age class variable
      * @param Integer $age
      */
     public function setAge($age)
@@ -95,6 +103,7 @@
     }
   
     /**
+     * Returns $_phone class variable
      * @return String
      */
     public function getPhone()
@@ -103,6 +112,7 @@
     }
   
     /**
+     * Sets $_phone class variable
      * @param String $phone
      */
     public function setPhone($phone)
@@ -111,6 +121,7 @@
     }
   
     /**
+     * Returns $_email class variable
      * @return String
      */
     public function getEmail()
@@ -119,6 +130,7 @@
     }
   
     /**
+     * Sets $_email class variable
      * @param String $email
      */
     public function setEmail($email)
@@ -127,6 +139,7 @@
     }
   
     /**
+     * Returns $_state class variable
      * @return String
      */
     public function getState()
@@ -135,6 +148,7 @@
     }
   
     /**
+     * Sets $_state class variable
      * @param String $state
      */
     public function setState($state)
@@ -143,6 +157,7 @@
     }
   
     /**
+     * Returns $_seeking class variable
      * @return String
      */
     public function getSeeking()
@@ -151,6 +166,7 @@
     }
   
     /**
+     * Sets $_seeking class variable
      * @param String $seeking
      */
     public function setSeeking($seeking)
@@ -159,6 +175,7 @@
     }
 
     /**
+     * Returns $_bio class variable
      * @return String
      */
     public function getBio()
@@ -167,6 +184,7 @@
     }
 
     /**
+     * Sets $_bio class variable
      * @param String $bio
      */
     public function setBio($bio)

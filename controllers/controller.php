@@ -5,20 +5,33 @@
     
     /**
      * Controller constructor.
+     *
+     * Controller constructor, passes in the f3 object.
      * @param Object $f3 fat-free object
      */
     public function __construct($f3)
     {
       $this->_f3 = $f3;
     }
-    
+  
+    /**
+     * Instaniates the Template class as $view and then renders home.html
+     */
     function home()
     {
       //render the home page
       $view = new Template();
       echo $view->render('views/home.html');
     }
-    
+  
+    /**
+     * Passes in globals $valid (Validate class) and $member (empty variable)
+     * The the form submits to itself runs various validation checks on the
+     * form data. Instantiates either Member or PremiumMember object inside
+     * $_SESSION based on whether the user clicks the sign up for Premium
+     * checkbox. Redirects to summary page if all data in $_POST is valid.
+     * Instaniates the Template class as $view and then renders info1.html
+     */
     function info()
     {
       global $valid;
@@ -112,8 +125,15 @@
       $view = new Template();
       echo $view->render('views/info1.html');
     }
-    
-    
+  
+    /**
+     * Passes in globals $valid (Validate class) and $data (DatingDataLayer
+     * class) The the form submits to itself runs various validation checks on
+     * the form data. Added validate form data to the session object.
+     * Redirects to the summary if Member, or summary if PremiumMember and
+     * all data in $_POST is valid. Instaniates the Template class as $view
+     * and then renders info2.html
+     */
     function location()
     {
       global $valid;
@@ -182,7 +202,14 @@
       $view = new Template();
       echo $view->render('views/info2.html');
     }
-    
+  
+    /**
+     * Passes in globals $valid (Validate class) and $data (DatingDataLayer
+     * class) The the form submits to itself runs various validation checks on
+     * the form data. Added validate form data to the session object.
+     * Redirects to summary page if all data in $_POST is valid.
+     * Instaniates the Template class as $view and then renders info3.html
+     */
     function interests()
     {
       global $valid;
@@ -230,7 +257,10 @@
       $view = new Template();
       echo $view->render('views/info3.html');
     }
-    
+  
+    /**
+     * Instaniates the Template class as $view and then renders summary.html
+     */
     function summary()
     {
       // render summary.html
