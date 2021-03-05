@@ -28,65 +28,70 @@
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         // store POST data
-        $fname = $_POST['firstName'];
-        $lname = $_POST['lastName'];
-        $age = $_POST['age'];
-        $gender = $_POST['gender'];
-        $phone = $_POST['phone'];
-        $premium = $_POST['premium'];
+        $fname = "";
+        $lname = "";
+        $age = "";
+        $gender = "";
+        $phone = "";
+        $isPremium = $_POST['isPremium'];
 
         // If name is valid set the name
-        if(empty($fname)) {
+        if(empty($_POST['firstName'])) {
           $this->_f3->set("errors['fname']", "Please enter a first name");
-        } else if(empty($lname)){
+        } else if(empty($_POST['lastName'])){
           $this->_f3->set("errors['lname']", "Please enter a last name");
-        } else if($valid->validName($fname) && $valid->validName($lname)) {
+        } else if($valid->validName($_POST['firstName']) && $valid->validName($_POST['lastName'])) {
           //$_SESSION['name'] = $fname." ".$lname;
-          $member->setFname($fname);
-          $member->setLname($lname);
+          $fname = $_POST['firstName'];
+          $lname = $_POST['lastName'];
         } else {
           $this->_f3->set("errors['name']", "Name is not valid, please try again");
         }
 
         // If age is valid set the age
-        if(empty($age)) {
+        if(empty($_POST['age'])) {
           $this->_f3->set("errors['age']", "Please enter an age");
-        } else if($valid->validAge($age)) {
-          //$_SESSION['age'] = $age;
-          $member->setAge($age);
+        } else if($valid->validAge($_POST['age'])) {
+          $age = $_POST['age'];
         } else {
           $this->_f3->set("errors['age']", "Age is not valid, please try again");
         }
 
         // If gender is valid set gender
-        if($valid->validGender($gender)) {
+        if($valid->validGender($_POST['gender'])) {
+          $gender = $_POST['gender'];
           //$_SESSION['gender'] = $gender;
-          $member->setGender($gender);
+          //$member->setGender($gender);
         } else {
-          $this->_f3->set("errors['gender']", "Stop spoofing my page!");
+          $this -> _f3 -> set("errors['gender']", "Stop spoofing my page!");
         }
 
         // If phone number is valid set phone number
-        if(empty($phone)) {
+        if(empty($_POST['phone'])) {
           $this->_f3->set("errors['phone']", "Please enter a phone number");
-        } else if($valid->validPhone($phone)) {
+        } else if($valid->validPhone($_POST['phone'])) {
+          $phone = $_POST['phone'];
           //$_SESSION['phone'] = $phone;
-          $member->setPhone($phone);
+          //$member->setPhone($phone);
         } else {
           $this->_f3->set("errors['phone']", "Phone number must contain numbers");
         }
         
-        if(isset($premium)){
-          if($valid->validPremium($premium)) {
-            $_SESSION['isPremium'] = true;
-          }
-        } else {
-          $_SESSION['isPremium'] = false;
-        }
+        
         
 
         // If errors variable is empty redirect
         if(empty($this->_f3->get('errors'))) {
+          if(isset($isPremium)){
+            if($valid->validPremium($isPremium)) {
+              $_SESSION['isPremium'] = true;
+              $GLOBALS['member'] = new PremiumMember($fname, $lname, $age, $gender, $phone);
+            }
+          } else {
+            $_SESSION['isPremium'] = false;
+            $GLOBALS['member'] = new Member($fname, $lname, $age, $gender, $phone);
+          }
+          
           $_SESSION['member'] = $member;
           $this->_f3->reroute('/location');
         }
@@ -182,7 +187,6 @@
     {
       global $valid;
       global $data;
-      global $premium;
       
       // If the form has submitted data to itself
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -196,25 +200,24 @@
         
         // If indoor is valid or empty submit to SESSION
         if (empty($indoor)){
-          $premium->setInDoorInterests("");
+          $_SESSION['member']->setInDoorInterests("");
         } else if ($valid -> validIndoor($indoor)) {
           $indoor = $_SESSION['indoorInterests'] = implode(", ", $indoor);
-          $premium->setInDoorInterests($indoor);
+          $_SESSION['member']->setInDoorInterests($indoor);
         } else {
           $this->_f3->set("errors['indoorActivities']", "Stop spoofing me");
         }
   
         // If outdoor is valid or empty submit to SESSION
         if (empty($outdoor)){
-          $premium->setOutDoorInterests("");
+          $_SESSION['member']->setOutDoorInterests("");
         } else if ($valid->validOutdoor($outdoor)) {
           $outdoor = $_SESSION['outdoorInterests'] = implode(", ", $outdoor);
-          $premium->setInDoorInterests($outdoor);
+          $_SESSION['member']->setOutDoorInterests($outdoor);
         } else {
           $this->_f3->set("errors['outdoorActivities']", "Stop spoofing me");
         }
         if(empty($this->_f3->get('errors'))) {
-          $_SESSION['premium'] = $premium;
           $this -> _f3 -> reroute('/summary');
         }
       }
@@ -234,7 +237,5 @@
       $view = new Template();
       echo $view->render('views/summary.html');
       
-      //destroy the session
-      session_destroy();
     }
   }
