@@ -52,11 +52,11 @@
         <div class="col-12 border p-3">
           <span>Seeking: {{ @SESSION.member->getSeeking() }}</span>
         </div>
-        <check if="{{ @SESSION.isPremium }}">-->
+        <check if="{{ @SESSION.isPremium }}">
           <div class="col-12 border p-3">
             <span>
-              Interests:{{ @SESSION.premium->getInDoorInterests() }}<check if="{{ !empty(@SESSION.indoorInterests) && !empty(@SESSION.outdoorInterests) }}">,</check>
-              {{ @SESSION.premium->getOutDoorInterests() }}
+              Interests: {{ @SESSION.member->getInDoorInterests() }}<check if="{{ !empty(@SESSION.indoorInterests) && !empty(@SESSION.outdoorInterests) }}">,</check>
+              {{ @SESSION.member->getOutDoorInterests() }}
             </span>
           </div>
         </check>
@@ -89,7 +89,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- jQuery first, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
