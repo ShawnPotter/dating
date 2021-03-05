@@ -27,8 +27,7 @@
   //instaniate classes
   $valid = new DatingValidate();
   $data = new DatingDataLayer();
-  $member = new Member();
-  $premium = new PremiumMember();
+  $member = "";
   $control = new Controller($f3);
   
   //set fat-free debugging
@@ -37,36 +36,37 @@
   //Define a default route (home page)
   $f3->route('GET /', function(){
     global $control;
-    var_dump($_SESSION);
     $control -> home();
+    // var_dump($_SESSION); // debug
   });
 
   //define a route to the info page
   $f3->route('GET|POST /info', function(){
     global $control;
-    var_dump($_SESSION);
     $control -> info();
+    // var_dump($_SESSION); // debug
   });
 
   //define a route to the location page
   $f3->route('GET|POST /location', function(){
     global $control;
-    var_dump($_SESSION);
     $control -> location();
+    // var_dump($_SESSION); // debug
   });
 
   //define a route to the interests page
   $f3->route('GET|POST /interests', function(){
     global $control;
-    var_dump($_SESSION);
     $control -> interests();
+    //var_dump($_SESSION); // debug
   });
   
   //define a route to the summary page
   $f3->route('GET /summary', function(){
     global $control;
-    var_dump($_SESSION);
     $control -> summary();
+    //print("<pre>".print_r($_SESSION['member'],true)."</pre>"); // debug
+    //destroy the session
     session_destroy();
   });
   
