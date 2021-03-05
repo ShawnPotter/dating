@@ -155,9 +155,11 @@
       echo "<br>";*/
       foreach($activities as $activity){
         if(!in_array($activity, $validActivities)){
+          $_SESSION['outdoorValid'] = true;
           return false;
         }
       }
+      $_SESSION['outdoorValid'] = true;
       return true;
     }
   }
