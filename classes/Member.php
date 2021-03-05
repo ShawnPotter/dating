@@ -12,7 +12,25 @@
     private $_bio;
   
     /**
-     * @return mixed
+     * Member constructor.
+     * @param $_fname
+     * @param $_lname
+     * @param $_gender
+     * @param $_age
+     * @param $_phone
+     */
+    public function __construct($_fname, $_lname, $_gender, $_age, $_phone)
+    {
+      $this -> _fname = $_fname;
+      $this -> _lname = $_lname;
+      $this -> _gender = $_gender;
+      $this -> _age = $_age;
+      $this -> _phone = $_phone;
+    }
+  
+  
+    /**
+     * @return String
      */
     public function getFname()
     {
@@ -20,7 +38,7 @@
     }
   
     /**
-     * @param mixed $fname
+     * @param String $fname
      */
     public function setFname($fname)
     {
