@@ -10,7 +10,7 @@
      * Object for use in the validation process.
      */
     function __construct() {
-      $this->_data = new DatingDataLayer();
+      $this->_data = new DatingDataLayer($dbh);
     }
   
     /**
