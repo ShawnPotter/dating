@@ -17,6 +17,7 @@
   
   //require autoload file
   require_once("vendor/autoload.php");
+  require $_SERVER['DOCUMENT_ROOT'].'/../config.php';
   
   //start a session
   session_start();
@@ -26,8 +27,7 @@
   
   //instaniate classes
   $valid = new DatingValidate();
-  $data = new DatingDataLayer();
-  $member = "";
+  $data = new DatingDataLayer($dbh);
   $control = new Controller($f3);
   
   //set fat-free debugging
@@ -65,9 +65,14 @@
   $f3->route('GET /summary', function(){
     global $control;
     $control -> summary();
-    //print("<pre>".print_r($_SESSION['member'],true)."</pre>"); // debug
+    print("<pre>".print_r($_SESSION['member'],true)."</pre>"); // debug
     //destroy the session
     session_destroy();
+  });
+
+  $f3->route('GET /admin', function(){
+    global $control;
+    $control->admin();
   });
   
   //run fat free
