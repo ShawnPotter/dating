@@ -94,9 +94,11 @@
         $arr = $statement->errorInfo();
         print_r($arr);*/
       }
+      /*
       else {
         //echo "<br>" . "statement not prepared" . "<br>";
       }
+      */
 
      
 
