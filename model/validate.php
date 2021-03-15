@@ -12,7 +12,8 @@
      *
      * @param object database object
      */
-    function __construct($dbh) {
+    function __construct($dbh)
+    {
       $this->_dbh = $dbh;
       $this->_data = new DatingDataLayer($dbh);
     }
@@ -26,7 +27,8 @@
      * @param String $name
      * @return bool
      */
-    function validName($name) {
+    function validName($name)
+    {
       return !empty($name) && ctype_alpha($name);
     }
   
@@ -39,7 +41,8 @@
      * @param String $age
      * @return bool
      */
-    function validAge($age) {
+    function validAge($age)
+    {
       return !empty($age) && ctype_digit($age) && ($age >= 18 && $age <= 118);
     }
   
@@ -52,7 +55,8 @@
      * @param String $gender
      * @return bool
      */
-    function validGender($gender) {
+    function validGender($gender)
+    {
       if($gender == "male" || $gender == "female"){
         return true;
       } else {
@@ -71,7 +75,8 @@
      * @param String $phone
      * @return bool
      */
-    function validPhone($phone) {
+    function validPhone($phone)
+    {
       $validPhone = preg_replace('/[^0-9]/', '', $phone);
       if(strlen($validPhone) === 10){
         return ctype_alnum($validPhone);
@@ -89,7 +94,8 @@
      * @param String $email
      * @return bool
      */
-    function validEmail($email) {
+    function validEmail($email)
+    {
       if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return true;
       } else {
@@ -106,7 +112,8 @@
      * @param String $state
      * @return bool
      */
-    function validState($state) {
+    function validState($state)
+    {
       $validStates = $this->_data->getStates();
       return in_array($state, $validStates);
     }
@@ -123,7 +130,8 @@
      * @param String $isPremium
      * @return bool
      */
-    function validPremium($isPremium){
+    function validPremium($isPremium)
+    {
       if($isPremium == "true"){
         return true;
       } else {
@@ -141,7 +149,8 @@
      * @param array $activities
      * @return bool
      */
-    function validIndoor($activities) {
+    function validIndoor($activities)
+    {
       $validActivities = $this->_data->getIndoorActivities();
       $validActivities = array_keys($validActivities);
       /*var_dump($validActivities);
@@ -164,7 +173,8 @@
      * @param array $activities
      * @return bool
      */
-    function validOutdoor($activities) {
+    function validOutdoor($activities)
+    {
       $validActivities = $this->_data->getOutDoorActivities();
       $validActivities = array_keys($validActivities);
       /*var_dump($validActivities);
