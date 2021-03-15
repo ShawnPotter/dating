@@ -26,9 +26,9 @@
   $f3 = Base::instance();
   
   //instaniate classes
-  $valid = new DatingValidate();
+  $valid = new DatingValidate($dbh);
   $data = new DatingDataLayer($dbh);
-  $control = new Controller($f3);
+  $control = new Controller($f3, $dbh);
   
   //set fat-free debugging
   $f3->set('DEBUG', 3);
@@ -58,14 +58,18 @@
   $f3->route('GET|POST /interests', function(){
     global $control;
     $control -> interests();
-    //var_dump($_SESSION); // debug
+    // var_dump($_SESSION); // debug
   });
   
   //define a route to the summary page
   $f3->route('GET /summary', function(){
+
+    //var_dump($_SESSION); // debug
+    
     global $control;
     $control -> summary();
-    print("<pre>".print_r($_SESSION['member'],true)."</pre>"); // debug
+    // print("<pre>".print_r($_SESSION['member'],true)."</pre>"); // debug
+    
     //destroy the session
     session_destroy();
   });

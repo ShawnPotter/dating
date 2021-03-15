@@ -2,14 +2,18 @@
   class DatingValidate
   {
     private $_data;
+    private $_dbh;
   
     /**
      * DatingValidate constructor
      *
      * DatingValidate constructor where we instaniate a new DatingDataLayer
      * Object for use in the validation process.
+     *
+     * @param object database object
      */
-    function __construct() {
+    function __construct($dbh) {
+      $this->_dbh = $dbh;
       $this->_data = new DatingDataLayer($dbh);
     }
   

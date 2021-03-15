@@ -60,7 +60,7 @@
         <div class="col-12 border p-3">
           <span>Seeking: {{ @SESSION.member->getSeeking() }}</span>
         </div>
-        <check if="{{ @SESSION.isPremium }}">
+        <check if="{{ @SESSION.member instanceof PrivateMember }}">
           <div class="col-12 border p-3">
             <span>
               Interests: {{ @SESSION.member->getInDoorInterests() }}<check if="{{ !empty(@SESSION.indoorInterests) && !empty(@SESSION.outdoorInterests) }}">,</check>

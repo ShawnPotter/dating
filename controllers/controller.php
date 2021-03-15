@@ -2,6 +2,7 @@
   class Controller
   {
     private $_f3;
+    private $_dbh;
     
     /**
      * Controller constructor.
@@ -9,9 +10,10 @@
      * Controller constructor, passes in the f3 object.
      * @param Object $f3 fat-free object
      */
-    public function __construct($f3)
+    public function __construct($f3, $dbh)
     {
       $this->_f3 = $f3;
+      $this->_dbh = $dbh;
     }
   
     /**
@@ -98,11 +100,11 @@
           if(isset($isPremium)){
             if($valid->validPremium($isPremium)) {
               $_SESSION['isPremium'] = true;
-              $GLOBALS['member'] = new PremiumMember($fname, $lname, $age, $gender, $phone);
+              $GLOBALS['member'] = new PremiumMember($fname, $lname, $gender, $age, $phone);
             }
           } else {
             $_SESSION['isPremium'] = false;
-            $GLOBALS['member'] = new Member($fname, $lname, $age, $gender, $phone);
+            $GLOBALS['member'] = new Member($fname, $lname, $gender, $age, $phone);
           }
           
           $_SESSION['member'] = $member;
@@ -263,9 +265,32 @@
      */
     function summary()
     {
+      global $data;
+      $data->insertMember();
       // render summary.html
       $view = new Template();
       echo $view->render('views/summary.html');
       
+    }
+  
+    /**
+     * Creates the admin page view, import global $data and uses the
+     * getMembers() function to pull all member records from the database
+     * then instaniates the Template class and renders admin.html
+     */
+    function admin(){
+      global $data;
+      $row = $data->getMembers();
+      $this->_f3->set("table", $row);
+      /*
+      echo "<pre>";
+      echo print_r($this->_f3->get("table"), true);
+      echo "</pre>";
+      */ // debug
+
+
+
+      $view = new Template();
+      echo $view->render('views/admin.html');
     }
   }

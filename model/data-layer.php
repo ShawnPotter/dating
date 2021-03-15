@@ -6,107 +6,152 @@
     
     /**
      * DatingDataLayer constructor.
+     * @param object database object
      */
     public function __construct($dbh)
     {
       $this->_dbh = $dbh;
     }
-    
-    function insertMember()
+  
+    /**
+     * Inserts a new member into a mysql table
+     *
+     * Inserts a new member into a mysql table using PDO
+     */
+    public function insertMember()
     {
       $sql = "INSERT INTO members (fname, lname, age, gender, phone, email, state, seeking, bio, premium, interests) 
               VALUES (:fname, :lname, :age, :gender, :phone, :email, :state, :seeking, :bio, :premium, :interests)";
 
       if($statement = $this->_dbh->prepare($sql)) {
-        echo "statement prepared" . "<br>";
+        //echo "<br>" . "statement prepared" . "<br>";
+        
+        if($_SESSION['isPremium'] == true){
+          $premium = 1;
+        } else{
+          $premium = 0;
+        }
+  
+        $fname = $_SESSION['member']->getFname();
+        $lname = $_SESSION['member']->getLname();
+        $age = $_SESSION['member']->getAge();
+        $gender = $_SESSION['member']->getGender();
+        $phone = $_SESSION['member']->getPhone();
+        $email = $_SESSION['member']->getEmail();
+        $state = $_SESSION['member']->getState();
+        $seeking = $_SESSION['member']->getSeeking();
+        $bio = $_SESSION['member']->getBio();
+        $interests = null;
+  
+  
+  
+        $statement->bindParam(":fname", $fname, PDO::PARAM_STR);
+        $statement->bindParam(":lname", $lname, PDO::PARAM_STR);
+        $statement->bindParam(":age", $age, PDO::PARAM_INT);
+        $statement->bindParam(":gender", $gender, PDO::PARAM_STR);
+        $statement->bindParam(":phone", $phone, PDO::PARAM_STR);
+        $statement->bindParam(":email", $email, PDO::PARAM_STR);
+        $statement->bindParam(":state", $state, PDO::PARAM_STR);
+        $statement->bindParam(":seeking", $seeking, PDO::PARAM_STR);
+        $statement->bindParam(":bio", $bio, PDO::PARAM_STR);
+        $statement->bindParam(":premium", $premium, PDO::PARAM_INT);
+  
+        if($_SESSION['member'] instanceof PremiumMember){
+          if($_SESSION['member']->getInDoorInterests() != null){
+            $interests = $_SESSION['member']->getInDoorInterests();
+          }
+          if($_SESSION['member']->getOutDoorInterests() != null) {
+            if(empty($interests)){
+              $interests = $_SESSION['member']->getOutDoorInterests();
+            } else{
+              $interests .= ", " . $_SESSION['member']->getOutDoorInterests();
+            }
+          }
+          /*
+          echo $fname . "<br>";
+          echo $lname . "<br>";
+          echo $age . "<br>";
+          echo $gender . "<br>";
+          echo $phone . "<br>";
+          echo $email . "<br>";
+          echo $state . "<br>";
+          echo $seeking . "<br>";
+          echo $bio . "<br>";
+          echo $interests . "<br>";
+          echo $premium . "<br>";
+          */ // debug
+        }
+        $statement->bindParam(":interests", $interests, PDO::PARAM_STR);
+        $statement->execute();
+        /*
+        if($statement->execute())
+          echo "statement executed";
+        else
+          echo "statement failed";
+        */ // debug
+  
+        /*echo "\nPDOStatement::errorInfo():\n";
+        $arr = $statement->errorInfo();
+        print_r($arr);*/
       }
       else {
-        echo "statement not prepared" . "<br>";
+        //echo "<br>" . "statement not prepared" . "<br>";
       }
 
-      if($_SESSION['isPremium'] = true){
-        $premium = 1;
-      } else{
-        $premium = 0;
-      }
-
-      $fname = $_SESSION['member']->getFname();
-      echo $fname . "<br>";
-      $lname = $_SESSION['member']->getLname();
-      echo $lname . "<br>";
-      $age = $_SESSION['member']->getAge();
-      echo $age . "<br>";
-      $gender = $_SESSION['member']->getGender();
-      echo $gender . "<br>";
-      $phone = $_SESSION['member']->getPhone();
-      echo $phone . "<br>";
-      $email = $_SESSION['member']->getEmail();
-      echo $email . "<br>";
-      $state = $_SESSION['member']->getState();
-      echo $state . "<br>";
-      $seeking = $_SESSION['member']->getSeeking();
-      echo $seeking . "<br>";
-      $bio = $_SESSION['member']->getBio();
-      echo $bio . "<br>";
-      $interests = "";
-
-      $statement->bindParam(":fname", $fname, PDO::PARAM_STR);
-      $statement->bindParam(":lname", $lname, PDO::PARAM_STR);
-      $statement->bindParam(":age", $age, PDO::PARAM_INT);
-      $statement->bindParam(":gender", $gender, PDO::PARAM_STR);
-      $statement->bindParam(":phone", $phone, PDO::PARAM_STR);
-      $statement->bindParam(":email", $email, PDO::PARAM_STR);
-      $statement->bindParam(":state", $state, PDO::PARAM_STR);
-      $statement->bindParam(":seeking", $seeking, PDO::PARAM_STR);
-      $statement->bindParam(":bio", $bio, PDO::PARAM_STR);
-      $statement->bindParam(":premium", $premium, PDO::PARAM_INT);
-
-      if($_SESSION['member'] instanceof PremiumMember){
-        if($_SESSION['member']->getInDoorInterests() != null){
-          $interests = $_SESSION['member']->getInDoorInterests();
-        }
-        if($_SESSION['member']->getOutDoorInterests() != null) {
-          if(empty($interests)){
-            $interests = $_SESSION['member']->getOutDoorInterests();
-          } else{
-            $interests .= ", " . $_SESSION['member']->getOutDoorInterests();
-          }
-        }
-        echo $interests . "<br>";
-        $statement->bindParam(":interests", $interests, PDO::PARAM_STR);
-      }
-      if($statement->execute())
-        echo "statement executed";
-      else
-        echo "statement failed";
-
-      echo "\nPDOStatement::errorInfo():\n";
-      $arr = $statement->errorInfo();
-      print_r($arr);
+     
 
 
     }
-    function getMembers()
+  
+    /**
+     * Gets all members from a mysql table
+     *
+     * Gets all members from a mysql table and stores them in an array of objects
+     * the sql statement orders the list of members by their last names
+     *
+     * @return mixed array of objects from a mysql table
+     */
+    public function getMembers()
     {
-      $sql = "SELECT * FROM members";
+      $sql = "SELECT * FROM members ORDER BY lname";
       $statement = $this->_dbh->prepare($sql);
       $statement->execute();
-      $row = $statement->fetchAll();
+      return $statement->fetchAll();
     }
-    function getMember($member_id)
+  
+    /**
+     * Gets a specific member by their member id
+     *
+     * Gets a specific member by their member id and returns that data from the
+     * database
+     *
+     * @param $member_id integer the id number of the member
+     * @return mixed an object array
+     */
+    public function getMember($member_id)
     {
       $sql = "SELECT * FROM members WHERE member_id = :member_id";
       $statement = $this->_dbh->prepare($sql);
       $statement->bindParam(":member_id", $member_id, PDO::PARAM_STR);
       $statement->execute();
+      return $statement->fetchAll();
     }
-    function getInterests($member_id)
+  
+    /**
+     * Gets the interests of a specific member
+     *
+     * Gets the interests of a specific member and returns them in an object array
+     *
+     * @param $member_id integer the id number of the member
+     * @return mixed an object array
+     */
+    public function getInterests($member_id)
     {
-      $sql = "SELECT interets FROM members WHERE member_id = :member_id";
+      $sql = "SELECT interests FROM members WHERE member_id = :member_id";
       $statement = $this->_dbh->prepare($sql);
       $statement->bindParam(":member_id", $member_id, PDO::PARAM_STR);
       $statement->execute();
-      $statement->errorInfo();
+      return $statement->fetchAll();
     }
   
   
