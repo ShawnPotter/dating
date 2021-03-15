@@ -278,7 +278,8 @@
      * getMembers() function to pull all member records from the database
      * then instaniates the Template class and renders admin.html
      */
-    function admin(){
+    function admin()
+    {
       global $data;
       $row = $data->getMembers();
       $this->_f3->set("table", $row);
